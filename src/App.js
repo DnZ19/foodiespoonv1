@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import Pages from "./pages/Pages";
 import './App.css';
+import Logo from "./assets/Foodie.svg";
+import Navigation from "./components/navigation/Navigation";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+        <div className="outer-container">
+            <div>
+                <img src={Logo} alt="foodie"/>
+            </div>
+
+            <div className="inner-container">
+
+                <h1>Foodie App</h1>
+
+                    <Navigation />
+                    <Pages/>
+
+            </div>
+        </div>
     </div>
   );
 }
