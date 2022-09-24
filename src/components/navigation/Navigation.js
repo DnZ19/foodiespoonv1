@@ -1,11 +1,13 @@
 import {FaSearch} from "react-icons/fa";
-// import {BsFillCalendar2DateFill} from "react-icons/bs";
+import { TiArrowBackOutline } from "react-icons/ti"
 import {FiHome} from "react-icons/fi"
 import {NavLink} from "react-router-dom";
 import {GiThreeLeaves} from "react-icons/gi";
 // import {FaCocktail} from "react-icons/fa";
 // import {GrSearchAdvanced} from "react-icons/gr";
 import styles from "./Navigation.module.css";
+import { useNavigate } from 'react-router-dom';
+
 
 function Navigation() {
 
@@ -16,6 +18,8 @@ function Navigation() {
             boxShadow: isActive ? "1px 1px 10px 7px white" : "none",
         }
     }
+
+    const navigate = useNavigate();
 
     return (
         <nav
@@ -36,17 +40,17 @@ function Navigation() {
                 <FaSearch/>
             </NavLink>
             <NavLink
-                to="/vegan"
+                to="/healthy"
                 style={navLinkStyles}
             >
                 <GiThreeLeaves/>
             </NavLink>
-            {/*<NavLink*/}
-            {/*    to="/daily"*/}
-            {/*    style={navLinkStyles}*/}
-            {/*>*/}
-            {/*    <BsFillCalendar2DateFill/>*/}
-            {/*</NavLink>*/}
+            <button
+                className={styles["back-button"]}
+                onClick={() => navigate(-1)}
+            >
+                <TiArrowBackOutline/>
+            </button>
             {/*<NavLink*/}
             {/*    to="/drinks"*/}
             {/*    style={navLinkStyles}*/}

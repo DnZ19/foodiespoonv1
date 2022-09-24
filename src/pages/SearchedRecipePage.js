@@ -6,18 +6,21 @@ import {Splide, SplideSlide} from '@splidejs/react-splide';
 import "@splidejs/splide/dist/css/splide.min.css";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Search from "../components/Search";
 
 
 function SearchedRecipePage() {
 
     const [query, setQuery] = useState([]);
+    const [cuisine, setCuisine] = useState("");
+
     let params = useParams();
 
     async function getRecipe(name) {
 
         try {
 
-            const api = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${name}&number=6`);
+            const api = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${name}&cuisine=${cuisine}&number=6`);
             setQuery(api.data.results);
 
 
@@ -29,11 +32,16 @@ function SearchedRecipePage() {
 
     useEffect(( ) => {
         getRecipe(params.search);
+
+
     }, [params.search])
 
 
     return (
         <Wrapper>
+
+            <h2>Searched Recipes</h2>
+
             <Splide
                 options={{
                     type: "loop",
@@ -60,6 +68,8 @@ function SearchedRecipePage() {
             </Splide>
 
         </Wrapper>
+
+
 
 
     );
@@ -106,6 +116,7 @@ const Card = styled.div`
     display: flex;
     justify-content: center;
     align-content: center;
+    max-width: 200px;
 
   }
   Link {

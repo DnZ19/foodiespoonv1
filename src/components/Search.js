@@ -1,5 +1,4 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
+import { useState} from "react";
 import styled from "styled-components";
 import {Splide, SplideSlide} from '@splidejs/react-splide';
 import "@splidejs/splide/dist/css/splide.min.css";
@@ -11,9 +10,18 @@ function Search() {
     const [input, setInput] = useState("");
     const navigate = useNavigate();
 
+    const [cuisine, setCuisine] = useState("");
+
+    const cuisineOptions = ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European",
+                            "European", "French", "German", "Greek", "Indian", "Irish", "Italian", "Japanese",
+                            "Jewish", "Korean", "Latin American", "Mediterranean", "Mexican", "Middle Eastern",
+                            "Nordic", "Southern", "Spanish", "Thai", "Vietnamese"]
+
+
     const submitHandler = ( e )  => {
         e.preventDefault();
         navigate("/SearchedRecipePage/" + input);
+
     }
 
     return (
@@ -34,6 +42,13 @@ function Search() {
 
                         />
                     </div>
+
+                    <select onChange={( e ) => setCuisine(e.target.value)} defaultValue={cuisine}>
+                        {cuisineOptions.map((option, idx) => (
+                            <option key={idx}>{option}</option>
+                        ))}
+
+                    </select>
                 </FormStyle>
 
             </Wrapper>
