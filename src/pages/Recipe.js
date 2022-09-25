@@ -62,9 +62,9 @@ function Recipe() {
                     )}
 
                     {activeTab === "summary" && (
-                        <Article>
+                        <ArticleSummary>
                             <h4 dangerouslySetInnerHTML={{ __html: details.summary}}></h4>
-                        </Article>
+                        </ArticleSummary>
 
                     )}
 
@@ -172,14 +172,17 @@ const Info = styled.div`
   align-items: center;
   width: 100%;
   word-wrap: break-word;
-  height: 300px;
+  height: 500px;
+  //border: 1px solid blue;
+  max-height: 500px;
+  overflow: auto;
   
     section {
       display: flex;
       flex-direction: column;
       justify-content: center;
       margin-left: 605px;
-      margin-bottom: 30px ;
+      margin-bottom: 250px ;
       position: absolute;
     }
     //article {
@@ -194,55 +197,91 @@ const Info = styled.div`
       }
     `;
 
-const Article = styled.div`
-  margin-left: 15px;
+const ArticleSummary = styled.div`
+  margin-left: 1px;
   //margin-top: 1px;
   width: 95%;
   max-width: 400px;
+  max-height: 500px;
+  height: 500px;
+  //margin-bottom: 170px;
+  //border: 1px solid black;
+  //
 
   h4 {
-    font-size: 0.9rem;
-    margin-top: 10px;
+    font-size: 16px;
+    margin-top: 1px;
   }
   
   
 `;
 
 const ArticleInstructions = styled.div`
-  
-  margin-top: 0%;
-  margin-left: 10px;
+
+  margin-left: 1px;
+  margin-top: 19px;
+  width: 95%;
   max-width: 400px;
+  max-height: 700px;
+  height: 700px;
+  //margin-bottom: 100px;
   //border: 1px solid black;
   
 
   li  {
     list-style-type: circle;
-    font-size: 10px;
-    line-height: 1.5rem;
+    font-size: 16px;
+    line-height: 1.7rem;
     margin-top: 2px;
-    max-height: 300px;
+    max-height: 500px;
+    margin-left: 3px;
 
   }
+
+  h4 {
+    font-size: 0.9rem;
+    margin-top: 1px;
+  }
+  
 `;
 
 const ArticleIngredients = styled.div`
-  
-  margin-top: 20px;
-  margin-left: 15px;
+
+  margin-left: 1px;
+  margin-top: 0;
+  width: 95%;
   max-width: 400px;
+  max-height: 700px;
+  height: 700px;
+  //margin-bottom: 100px;
   //border: 1px solid black;
   
+  ul  {
+    margin: 0;
+    max-height: 800px;
+  }
+  
+  input {
+    margin-right: 20px;
+    width: 15px;
+    height: 15px;
+    margin-top:2px;
+    
+  }
+  
   li {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: baseline;
     list-style-type: none;
-    font-size: 1rem;
-    line-height: 1.9rem;
+    font-size: 16px;
+    line-height: 1.7rem;
     //margin-top: -10px;
   } .bold
     {
       font-size: medium;
       font-weight: bolder;
     }
-
-
+  
 `;

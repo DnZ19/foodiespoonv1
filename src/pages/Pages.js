@@ -5,6 +5,7 @@ import SearchPage from "./SearchPage";
 import SearchedRecipePage from "./SearchedRecipePage";
 import Recipe from "./Recipe";
 import Healthy from "./Healthy";
+// import HealthyFood from "../components/HealthyFood";
 
 function Pages()    {
     return  (
@@ -17,6 +18,7 @@ function Pages()    {
             <Route path="/searchedRecipePage/:search" element={<SearchedRecipePage />}/>
             <Route path="/recipe/:id" element={<Recipe />}/>
             <Route path="/healthy" element={<Healthy />}/>
+            <Route path="/healthy/:diet" element={<Healthy />}/>
 
         </Routes>
     )
