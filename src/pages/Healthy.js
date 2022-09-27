@@ -16,10 +16,10 @@ function Healthy() {
 
         try {
 
-            const data = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&diet=${ diet }&number=6`);
+            const data = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&diet=${ diet }&addRecipeInformation=true&number=5`);
             setDiet(data.data.results);
             console.log(data.data.results);
-            console.log(diet);
+
 
 
         } catch (e) {
@@ -31,55 +31,105 @@ function Healthy() {
     }
 
     useEffect(() => {
-        getHealthyRecipes(params.diet)
-    }, [params.diet])
+        getHealthyRecipes(params.diet);
+        console.log(params.diet);
+
+    }, [params.diet]);
 
 
 
     return (
         <div>
             <HealthyFood />
-            <Grid>
+            <List>
                 {diet.map((item) => {
                     return (
-                        <Link to={"/recipe/" + item.id}>
-                            <Card key={item.id}>
-                                <img src={item.image} alt={item.title}/>
-                                <h4>{item.title}</h4>
+                        <Link
+                            to={"/recipe/" + item.id}
+                            key={item.id}
+                            style={{textDecoration: "none"}}
+                        >
 
+                                <Card key={item.id}>
+                                <div>
+                                    <img src={item.image} alt={item.title}/>
+                                </div>
+
+                                <div>
+                                    <h4>{item.title}</h4>
+                                </div>
                             </Card>
+
                         </Link>
 
                     )
                 })}
-            </Grid>
+            </List>
         </div>
     );
 }
 
 export default Healthy;
 
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
-  grid-gap: 2rem;
-  border: 1px solid black;
+const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  
+  width: 100%;
+  height: 620px;
+  max-height: 620px;
+  //border: 1px solid black;
   margin-top: -250px;
+  margin-bottom: 33px;
+  padding: 0;
   
 `;
 
 const Card = styled.div`
-img {
   width: 100%;
-  border-radius: 2rem;
-}
+  height: 100px;
+  max-height: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  border: 1px solid #262c2c;
+  margin: 0 0 15px;
+  overflow: auto;
+  box-shadow: 3px 3px 3px 3px rgba(77, 79, 79, 0.1);
+  border-radius: 5px;
+  background: #1C1E20;
+
+
+  div {
+    height: 100px;
+    margin: 0;
+
+  }
+
+
+  img {
+    margin: 0;
+    height: 100px;
+    width: 100px;
+    border-radius: 5px 0 5px 0;
+    box-shadow: 0px 0px 0px 3px rgba(77, 79, 79, 0.1);
+
+
+  }
+
   a {
     text-decoration: none;
   }
+
   h4 {
+    width: 300px;
     text-align: center;
-    padding: 1rem;
+    //border: 1px solid black;
+    color: white;
+    //padding: 1rem;
+    text-decoration-line: none;
   }
-  
+
 
 `;

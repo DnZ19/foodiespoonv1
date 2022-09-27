@@ -3,6 +3,7 @@ import './App.css';
 import Logo from "./assets/Foodie.svg";
 import Navigation from "./components/navigation/Navigation";
 
+
 function App() {
   return (
     <div className="App">
@@ -14,10 +15,12 @@ function App() {
 
             <div className="inner-container">
 
-                <h1>Foodie App</h1>
+
 
                     <Navigation />
                     <Pages/>
+
+                <h1>Foodie App</h1>
 
             </div>
         </div>

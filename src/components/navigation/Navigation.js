@@ -14,8 +14,8 @@ function Navigation() {
     const navLinkStyles = ({ isActive }) => {
         return  {
 
-            border: isActive ? "1px solid white" : "2px solid #B7B0B5",
-            boxShadow: isActive ? "1px 1px 10px 7px white" : "none",
+            border: isActive ? "0.5px solid white" : "",
+            boxShadow: isActive ? "1px 1px 5px 3px white" : "none",
         }
     }
 
