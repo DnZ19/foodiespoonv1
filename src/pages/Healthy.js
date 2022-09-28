@@ -16,7 +16,7 @@ function Healthy() {
 
         try {
 
-            const data = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&diet=${ diet }&addRecipeInformation=true&number=5`);
+            const data = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&diet=${ diet }&addRecipeInformation=true&number=30`);
             setDiet(data.data.results);
             console.log(data.data.results);
 
@@ -32,8 +32,6 @@ function Healthy() {
 
     useEffect(() => {
         getHealthyRecipes(params.diet);
-        console.log(params.diet);
-
     }, [params.diet]);
 
 
@@ -79,11 +77,11 @@ const List = styled.div`
   width: 100%;
   height: 620px;
   max-height: 620px;
-  //border: 1px solid black;
+  border: 1px solid black;
   margin-top: -250px;
   margin-bottom: 33px;
   padding: 0;
-  
+  overflow: auto;
 `;
 
 const Card = styled.div`
@@ -95,7 +93,6 @@ const Card = styled.div`
   align-items: start;
   border: 1px solid #262c2c;
   margin: 0 0 15px;
-  overflow: auto;
   box-shadow: 3px 3px 3px 3px rgba(77, 79, 79, 0.1);
   border-radius: 5px;
   background: #1C1E20;

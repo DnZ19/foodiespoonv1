@@ -31,7 +31,7 @@ function Popular() {
     return (
         <div>
             <Wrapper>
-                <h3>Popular Recipes</h3>
+                <h3>Most popular recipes</h3>
 
                 <Splide
                     options={{
@@ -64,15 +64,26 @@ function Popular() {
                                     <TitleBar><h4>{recipe.title}</h4></TitleBar>
 
                                     <InfoBar>
-                                        <div>
-                                            <h4>{recipe.dishTypes[0]}</h4>
+                                        <div key={recipe.id}>
+                                            <p>Type of dish: </p>
+                                            {recipe.dishTypes.map((dishType) => {
+                                                return (
+                                                        <h5>{dishType}</h5>
+                                                )
+                                            })}
+
                                         </div>
                                         <div>
-                                            <h4>{recipe.sourceName}</h4>
+                                            <p>Source: </p>
+                                            <h5>{recipe.sourceName}</h5>
+                                            {recipe.vegan === true ? <h6>Vegan!</h6> : <h6></h6>}
+                                            {recipe.vegetarian === true ? <h6>Vegetarian!</h6> : <h6></h6>}
                                         </div>
                                         <div>
-                                            <h4>Health Score:</h4>
-                                            <p>{recipe.healthScore}</p>
+                                            <p>Health Score:</p>
+                                            <h5>{recipe.healthScore}</h5>
+                                            <p>Ready in:</p>
+                                            <h5>{recipe.readyInMinutes} min.</h5>
                                         </div>
 
                                     </InfoBar>
@@ -114,11 +125,12 @@ const Card = styled.div`
 
   display: flex;
   flex-direction: column;
-  min-height: 25rem;
+  min-height: 400px;
   border-radius: 2rem;
   overflow: hidden;
   position: relative;
   margin-top: 5px;
+  margin-bottom: 2px;
 
   img {
     border-radius: 1rem;
@@ -128,52 +140,6 @@ const Card = styled.div`
     height: 100%;
     object-fit: cover;
   }
-
-  //p {
-  //  position: absolute;
-  //  z-index: 10;
-  //  left: 50%;
-  //  bottom: 0%;
-  //  transform: translate(-50%, 0%);
-  //  color: white;
-  //  width: 100%;
-  //  text-align: center;
-  //  font-weight: 600;
-  //  font-size: 1rem;
-  //
-  //  display: flex;
-  //  justify-content: center;
-  //  align-content: center;
-  //  max-width: 200px;
-  //  background: rgba(91, 84, 84, 0.73);
-  //  margin-bottom: 25px;
-  //  border-radius: 5px;
-  //  height: 80px;
-  //  padding: 5px;
-  //  border: 0.1px solid black;
-  //
-  //}
-  //
-  //h3 {
-  //  position: absolute;
-  //  z-index: 10;
-  //  left: 18%;
-  //  top: 20%;
-  //  transform: translate(-50%, 0%);
-  //  background: rgba(91, 84, 84, 0.63);
-  //  border-radius: 5px;
-  //  color: white;
-  //  width: 40%;
-  //  text-align: center;
-  //  font-weight: 600;
-  //  font-size: 1rem;
-  //  height: 40px;
-  //  display: flex;
-  //  justify-content: center;
-  //  align-content: center;
-  //  border: 0.1px solid black;
-  //
-  //}
 
   h4 {
 
@@ -206,6 +172,7 @@ const TitleBar = styled.div`
     font-size: 20px;
   }
   
+  
 
 `;
 
@@ -223,38 +190,44 @@ const InfoBar = styled.div`
   
   div{
     width: 150px;
-    height: 90px;
+    height: 100px;
     max-width: 150px;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid #1C1E20;
     
   }
   
   h4 {
-    color: white;
+    color: #1C1E20;
     padding: 2px;
+    margin-bottom: 5px;
+    
+  }
+
+  h5 {
+    color: #1C1E20;
+    font-size: 10px;
+    padding: 2px;
+  }
+  
+  h6 {
+    margin-top: 5px;
+    color: var(--main-style-element-color);
+    font-size: 12px;
     
   }
   
   p {
-    margin-top: 12px;
+    margin-top: 2px;
     color: white;
-    font-size: 25px;
+    font-size: 15px;
   }
 
 
 `;
-
-// const Gradient = styled.div`
-//   z-index: 11;
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   background: linear-gradient(0,0,0,0.5), rgba(0,0,0,1.0);
-// `;
 
 
 export default Popular;

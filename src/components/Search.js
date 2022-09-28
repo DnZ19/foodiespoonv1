@@ -41,6 +41,7 @@ function Search() {
 
     useEffect(( ) => {
         getRecipe(params.search);
+        setInput("");
 
 
     }, [params.search])
@@ -79,6 +80,8 @@ function Search() {
                 </FormStyle>
 
                 <SearchBox>
+
+                    {query.length > 0 &&
                     <Splide
                         options={{
                             type: "loop",
@@ -96,7 +99,6 @@ function Search() {
                                         to={"/recipe/" + item.id}
                                     >
                                             <img src={item.image} alt={item.title}/>
-                                            {/*<Gradient />*/}
 
                                     </Link>
                                     </Card>
@@ -105,8 +107,8 @@ function Search() {
 
                                     <InfoBar>
                                         <div>
+                                            <p>Nutrients: </p>
                                             <ul>
-                                                {/*<h4>{item.cuisines[0]}</h4>*/}
                                                 <li>{item.nutrition.nutrients[0].amount} Kcal</li>
                                                 <li>{item.nutrition.nutrients[1].amount}  g Fat</li>
                                                 <li>{item.diets[0]}</li>
@@ -115,13 +117,13 @@ function Search() {
                                         </div>
 
                                         <div>
-                                            <h4>{item.sourceName}</h4>
+                                            <p>Source: </p>
+                                            <h5>{item.sourceName}</h5>
                                         </div>
                                         <div>
-                                            <h4>Health Score:</h4>
-                                            <p>{item.healthScore}</p>
+                                            <p>Health Score:</p>
+                                            <h5>{item.healthScore}</h5>
                                         </div>
-                                        {console.log(item)}
 
                                     </InfoBar>
 
@@ -129,6 +131,7 @@ function Search() {
                             );
                         })}
                     </Splide>
+                    }
 
                 </SearchBox>
 
@@ -139,7 +142,7 @@ function Search() {
 }
 
 const Wrapper = styled.div`
-  margin: 4rem 0rem;
+  margin: 4rem 0;
 
   h3 {
     margin-bottom: 10px;
@@ -161,38 +164,13 @@ const Card = styled.div`
     height: 100%;
     object-fit: cover;
   }
-
-  //p {
-  //  position: absolute;
-  //  z-index: 10;
-  //  left: 50%;
-  //  bottom: 0%;
-  //  transform: translate(-50%, 0%);
-  //  color: white;
-  //  width: 100%;
-  //  text-align: center;
-  //  font-weight: 600;
-  //  font-size: 1rem;
-  //  height: 20%;
-  //  display: flex;
-  //  justify-content: center;
-  //  align-content: center;
-  //
-  //}
+  
 ;
 
 `;
 
-// const Gradient = styled.div`
-//   z-index: 3;
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   background: linear-gradient(0,0,0,0), rgba(0,0,0,1.0);
-// `;
-
 const FormStyle = styled.form`
-  //margin: 0rem 1rem;
+  
 
   div {
     position: relative;
@@ -267,30 +245,37 @@ const InfoBar = styled.div`
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid #1C1E20;
     
   }
-  
+
   h4 {
     color: white;
-    padding: 10px 10px 10px 5px;
-    
-    
+    padding: 2px;
+
   }
-  
+
+  h5 {
+    color: #1C1E20;
+    font-size: 10px;
+    padding-top: 10px;
+  }
+
   p {
-    margin-top: 0;
+    margin-top: 2px;
     color: white;
-    font-size: 25px;
+    font-size: 15px;
   }
   
   ul {
-    color: white;
-    padding: 10px 10px 10px 18px;
+    color: #1C1E20;
+    padding: 10px;
     max-width: 150px;
-    
-    
+    list-style: none;
+    font-size: 10px;
+    font-weight: bold;
   }
+  
 
 
 `;

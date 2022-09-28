@@ -4,12 +4,13 @@ import styled from "styled-components";
 import "@splidejs/splide/dist/css/splide.min.css";
 import {useParams} from "react-router-dom";
 import React from 'react';
+import {logDOM} from "@testing-library/react";
 
 function Recipe() {
 
     let params = useParams();
     const [details, setDetails] = useState({});
-    const [activeTab, setActiveTab] = useState("instructions");
+    const [activeTab, setActiveTab] = useState("summary");
     const [checked, setChecked] = useState(false);
 
     useEffect(() => {
@@ -18,7 +19,7 @@ function Recipe() {
 
     async function getRecipeDetails() {
         try {
-            const data = await axios.get(`https://api.spoonacular.com/recipes/${params.id}/information?apiKey=${process.env.REACT_APP_API_KEY}`);
+            const data = await axios.get(`https://api.spoonacular.com/recipes/${params.id}/information?apiKey=${process.env.REACT_APP_API_KEY}&addRecipeNutrition=true`);
             setDetails(data.data);
         } catch
             (e) {
@@ -52,6 +53,11 @@ function Recipe() {
                             className={activeTab === "ingredients" ? "active" : ""}
                             onClick={() => setActiveTab("ingredients")}
                         >Ingredients
+                        </Button>
+                        <Button
+                            className={activeTab === "information" ? "active" : ""}
+                            onClick={() => setActiveTab("information")}
+                        >Information
                         </Button>
                     </section>
                     {activeTab === "instructions" && (
@@ -93,6 +99,51 @@ function Recipe() {
                             </ul>
 
                         </ArticleIngredients>
+
+                    )}
+
+                    {activeTab === "information" && (
+                        <ArticleInformation>
+                            <div>
+                                <h3>Cuisines:</h3>
+                                    {details.cuisines.map((cuisine) => {
+                                        return (
+                                            <p>{cuisine}</p>
+                                        )
+                                    })}
+                            </div>
+                            <div>
+                                <h3>Diets:</h3>
+                                    {details.diets.map((diet) => {
+                                        return (
+                                            <p>{diet}</p>
+                                        )
+                                    })}
+                            </div>
+                            <div>
+                                <h3>Health Score:</h3>
+                                <p>{details.healthScore}</p>
+
+
+                            </div>
+                            <div>
+                                <h3>Dish type:</h3>
+                                {details.dishTypes.map((dishType) => {
+                                    return (
+                                       <p>{dishType}</p>
+                                    )
+                                })}
+                            </div>
+                            <div>
+                                <h3>Ready in: </h3>
+                                <p>{details.readyInMinutes} min.</p>
+
+                            </div>
+                            <div>
+                                <h3>Servings:</h3>
+                                <p>{details.servings}</p>
+                            </div>
+                        </ArticleInformation>
 
                     )}
 
@@ -336,4 +387,46 @@ const Ingredient = styled.div`
   align-items: baseline;
   list-style-type: none;
   
+`;
+
+const ArticleInformation = styled.div`
+  display: grid;
+  grid-template-columns: 180px 180px;
+  max-width: 450px;
+  height: 400px;
+  gap: 10px 30px;
+  //border: 1px solid #494949;
+  
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #494949;
+    width: 180px;
+    height: 130px;
+    background: #5b5454;
+    overflow: scroll;
+    
+    h1 {
+      color: white;
+    }
+    h2 {
+      color: white;
+    }
+    h3 {
+      color: white;
+      padding: 3px;
+    }
+    h4 {
+      color: #1C1E20;
+    }
+    p {
+      color: #1C1E20;
+      padding: 3px;
+      
+    }
+    
+  }
+
 `;
