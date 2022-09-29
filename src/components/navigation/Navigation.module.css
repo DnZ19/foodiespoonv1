@@ -5,6 +5,10 @@ nav {
     justify-content: space-evenly;
     margin-top: 10px;
     margin-bottom: -40px;
+    background: rgba(51, 49, 47, 0.39);
+    height: 60px;
+    border-radius: 25px;
+    border: 0.1px solid rgba(255, 165, 0, 0.24);
 }
 
 nav a{

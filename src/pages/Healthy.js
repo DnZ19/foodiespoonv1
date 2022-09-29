@@ -16,7 +16,7 @@ function Healthy() {
 
         try {
 
-            const data = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&diet=${ diet }&addRecipeInformation=true&number=30`);
+            const data = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&diet=${ diet }&addRecipeInformation=true&addRecipeNutrition=true&number=30`);
             setDiet(data.data.results);
             console.log(data.data.results);
 

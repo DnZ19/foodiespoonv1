@@ -4,11 +4,13 @@ import styled from "styled-components";
 import "@splidejs/splide/dist/css/splide.min.css";
 import {useParams} from "react-router-dom";
 import React from 'react';
-import {logDOM} from "@testing-library/react";
+// import { GiKnifeFork } from "react-icons/gi";
+// import {logDOM} from "@testing-library/react";
 
 function Recipe() {
 
     let params = useParams();
+
     const [details, setDetails] = useState({});
     const [activeTab, setActiveTab] = useState("summary");
     const [checked, setChecked] = useState(false);
@@ -21,6 +23,7 @@ function Recipe() {
         try {
             const data = await axios.get(`https://api.spoonacular.com/recipes/${params.id}/information?apiKey=${process.env.REACT_APP_API_KEY}&addRecipeNutrition=true`);
             setDetails(data.data);
+            console.log(data.data);
         } catch
             (e) {
             console.error(e);
@@ -84,6 +87,7 @@ function Recipe() {
                                     >
                                         <input
                                             type="checkbox"
+                                            // checked={checked}
                                             onChange={() => setChecked(!checked)}
 
                                         />
@@ -114,11 +118,15 @@ function Recipe() {
                             </div>
                             <div>
                                 <h3>Diets:</h3>
-                                    {details.diets.map((diet) => {
-                                        return (
-                                            <p>{diet}</p>
-                                        )
-                                    })}
+
+                                {details.diets.map((diet) => {
+
+                                    return (
+                                    <p>{diet}</p>
+                                    )
+                                 })}
+
+
                             </div>
                             <div>
                                 <h3>Health Score:</h3>
@@ -400,7 +408,7 @@ const ArticleInformation = styled.div`
   div {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     border: 1px solid #494949;
     width: 180px;
@@ -430,3 +438,10 @@ const ArticleInformation = styled.div`
   }
 
 `;
+
+// const NoResultIcon = styled.div`
+//
+//   position: absolute;
+//
+//
+// `;

@@ -1,16 +1,19 @@
-import { useState} from "react";
+import {useState} from "react";
 import styled from "styled-components";
 import {Splide, SplideSlide} from '@splidejs/react-splide';
 import "@splidejs/splide/dist/css/splide.min.css";
-import { FaSearch } from "react-icons/fa";
+import {FaSearch} from "react-icons/fa";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import React, {useEffect} from "react";
+import { GiKnifeFork } from "react-icons/gi";
+import '../App.css';
 
 function Search() {
 
     const [input, setInput] = useState("");
     const [query, setQuery] = useState([]);
+    const [error, toggleError] = useState(false);
 
     let params = useParams();
 
@@ -24,29 +27,28 @@ function Search() {
     //     "Nordic", "Southern", "Spanish", "Thai", "Vietnamese"]
 
 
-    async function getRecipe( name ) {
+    async function getRecipe(name) {
 
         try {
 
-            const api = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${ name }&addRecipeInformation=true&addRecipeNutrition=true&number=6`);
+            const api = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&query=${name}&addRecipeInformation=true&addRecipeNutrition=true&number=6`);
             setQuery(api.data.results);
-
-
 
 
         } catch (e) {
             console.error(e)
+            toggleError(true);
         }
     };
 
-    useEffect(( ) => {
+    useEffect(() => {
         getRecipe(params.search);
         setInput("");
 
 
     }, [params.search])
 
-    const submitHandler = ( e )  => {
+    const submitHandler = (e) => {
         e.preventDefault();
         navigate("/Search/" + input);
 
@@ -71,6 +73,9 @@ function Search() {
                         />
                     </div>
 
+                    {error && <ErrorMessage>something went wrong...please try again.</ErrorMessage>}
+
+
                     {/*<select onChange={( e ) => setCuisine(e.target.value)} defaultValue={cuisine}>*/}
                     {/*    {cuisineOptions.map((option, idx) => (*/}
                     {/*        <option key={idx}>{option}</option>*/}
@@ -81,56 +86,70 @@ function Search() {
 
                 <SearchBox>
 
+                    {query.length === 0 &&
+                        <>
+                            <Message>No search results...</Message>
+                            <Image><GiKnifeFork className="background-icon-search" /></Image>
+
+                        </>
+
+
+                    }
+
                     {query.length > 0 &&
-                    <Splide
-                        options={{
-                            type: "loop",
-                            perPage: 1,
-                        }}
-                    >
-                        {query.map((item) => {
-                            return (
+                        <Splide
+                            options={{
+                                type: "loop",
+                                perPage: 1,
+                                arrows: true,
+                                pagination: false,
+                                drag: "free",
+                                gap: "1px",
+                            }}
+                        >
+                            {query.map((item) => {
+                                return (
 
 
-                                <SplideSlide
-                                    key={item.id}>
-                                    <Card>
-                                    <Link
-                                        to={"/recipe/" + item.id}
-                                    >
-                                            <img src={item.image} alt={item.title}/>
+                                    <SplideSlide
+                                        key={item.id}>
+                                        <Card>
+                                            <Link
+                                                to={"/recipe/" + item.id}
+                                            >
+                                                <img src={item.image} alt={item.title}/>
 
-                                    </Link>
-                                    </Card>
+                                            </Link>
+                                        </Card>
 
-                                    <TitleBar><h4>{item.title}</h4></TitleBar>
+                                        <TitleBar><h4>{item.title}</h4></TitleBar>
 
-                                    <InfoBar>
-                                        <div>
-                                            <p>Nutrients: </p>
-                                            <ul>
-                                                <li>{item.nutrition.nutrients[0].amount} Kcal</li>
-                                                <li>{item.nutrition.nutrients[1].amount}  g Fat</li>
-                                                <li>{item.diets[0]}</li>
-                                            </ul>
+                                        <InfoBar>
+                                            <div>
+                                                <p>Nutrients: </p>
+                                                <ul>
+                                                    <li>{item.nutrition.nutrients[0].amount} Kcal</li>
+                                                    <li>{item.nutrition.nutrients[1].amount} g Fat</li>
+                                                    <li>{item.diets[0]}</li>
+                                                </ul>
 
-                                        </div>
+                                            </div>
 
-                                        <div>
-                                            <p>Source: </p>
-                                            <h5>{item.sourceName}</h5>
-                                        </div>
-                                        <div>
-                                            <p>Health Score:</p>
-                                            <h5>{item.healthScore}</h5>
-                                        </div>
+                                            <div>
+                                                <p>Source: </p>
+                                                <h5>{item.sourceName}</h5>
+                                            </div>
+                                            <div>
+                                                <p>Health Score:</p>
+                                                <h5>{item.healthScore}</h5>
+                                            </div>
 
-                                    </InfoBar>
+                                        </InfoBar>
 
-                                </SplideSlide>
-                            );
-                        })}
-                    </Splide>
+                                    </SplideSlide>
+                                );
+                            })}
+                        </Splide>
                     }
 
                 </SearchBox>
@@ -152,6 +171,7 @@ const Wrapper = styled.div`
 
 const Card = styled.div`
   min-height: 25rem;
+  height: 250px;
   border-radius: 2rem;
   overflow: hidden;
   position: relative;
@@ -161,49 +181,49 @@ const Card = styled.div`
     position: absolute;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 300px;
     object-fit: cover;
+    box-shadow: none;
   }
-  
+
 ;
 
 `;
 
 const FormStyle = styled.form`
-  
+
 
   div {
     position: relative;
     width: 100%;
   }
 
+  input {
+    border: none;
+    background: linear-gradient(35deg, #494949, #313131);
+    font-size: 1.5rem;
+    color: white;
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+    outline: none;
+    width: 100%;
 
+  }
 
-    input {
-      border: none;
-      background: linear-gradient(35deg, #494949, #313131);
-      font-size: 1.5rem;
-      color: white;
-      padding: 1rem 3rem;
-      border-radius: 1rem;
-      outline: none;
-      width: 100%;
-
-    }
-    svg {
-      position: absolute;
-      top: 50%;
-      left: 0%;
-      transform: translate(100%, -50%);
-      color: white;
-    }
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(100%, -50%);
+    color: white;
+  }
 `;
 
 const SearchBox = styled.div`
   //border: 1px solid black;
   height: 535px;
   width: 100%;
-  
+
 `;
 
 const TitleBar = styled.div`
@@ -216,12 +236,14 @@ const TitleBar = styled.div`
   justify-content: center;
   align-items: center;
   align-content: center;
-  
+  margin-top: -50px;
+  margin-bottom: 20px;
+
   h4 {
     color: white;
     font-size: 20px;
   }
-  
+
 
 `;
 
@@ -231,22 +253,23 @@ const InfoBar = styled.div`
   justify-content: space-between;
   align-items: start;
   margin-top: 10px;
-  background: #5b5454;
+
   width: 100%;
-  height: 100%;
+  height: 150px;
   z-index: 12;
   border-radius: 5px;
-  
-  div{
+
+  div {
     width: 150px;
-    height: 90px;
+    height: 120px;
     max-width: 150px;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
     border: 1px solid #1C1E20;
-    
+    background: #5b5454;
+
   }
 
   h4 {
@@ -266,7 +289,7 @@ const InfoBar = styled.div`
     color: white;
     font-size: 15px;
   }
-  
+
   ul {
     color: #1C1E20;
     padding: 10px;
@@ -275,8 +298,31 @@ const InfoBar = styled.div`
     font-size: 10px;
     font-weight: bold;
   }
-  
 
+`;
+
+const Message = styled.div`
+  margin-left: 50px;
+  margin-top: 50px;
+  position: absolute;
+  color: red;
+
+`;
+
+const ErrorMessage = styled.div`
+  margin-left: 50px;
+  margin-top: 10px;
+  margin-bottom: -20px;
+  position: relative;
+  color: red;
+
+`;
+
+
+const Image = styled.div`
+  position: absolute;
+  margin-top: 150px;
+  margin-left: 80px;
 
 `;
 

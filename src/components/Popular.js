@@ -37,6 +37,10 @@ function Popular() {
                     options={{
                         type: "loop",
                         perPage: 1,
+                        arrows: true,
+                        pagination: false,
+                        drag: "free",
+                        gap: "1px",
                     }}
                 >
                     {popular.map((recipe) => {
@@ -117,6 +121,7 @@ const Slide = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-shadow: none;
   
 
 `;
@@ -131,14 +136,16 @@ const Card = styled.div`
   position: relative;
   margin-top: 5px;
   margin-bottom: 2px;
+  box-shadow: none;
 
   img {
     border-radius: 1rem;
     position: absolute;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 300px;
     object-fit: cover;
+    box-shadow: none;
   }
 
   h4 {
@@ -166,6 +173,8 @@ const TitleBar = styled.div`
   justify-content: center;
   align-items: center;
   align-content: center;
+  margin-top: -50px;
+  margin-bottom: 20px;
   
   h4 {
     color: white;
@@ -182,21 +191,22 @@ const InfoBar = styled.div`
   justify-content: space-between;
   align-items: start;
   margin-top: 10px;
-  background: #5b5454;
   width: 100%;
-  height: 100%;
+  height: 150px;
   z-index: 12;
   border-radius: 5px;
   
   div{
     width: 150px;
-    height: 100px;
+    height: 120px;
     max-width: 150px;
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
     border: 1px solid #1C1E20;
+    background: #5b5454;
+    margin-top: 10px;
     
   }
   

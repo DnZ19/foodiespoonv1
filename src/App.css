@@ -37,12 +37,13 @@ body    {
 
 img {
 
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 85px;
     box-shadow: 10px 10px 10px rgba(77, 79, 79, 0.4);
     margin-top: 30px;
     border-radius: 5px;
     border: 1px solid var(--main-style-element-color);
+
 
 }
 
@@ -59,6 +60,11 @@ img {
     /*border: 1px solid black;*/
     box-shadow: 10px 25px 20px 10px rgba(77, 79, 79, 0.1);
 
+}
+
+.background-icon-search {
+    width: 250px;
+    height: 250px;
 }
 
 h1  {
