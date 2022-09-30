@@ -7,13 +7,14 @@ import React from 'react';
 // import { GiKnifeFork } from "react-icons/gi";
 // import {logDOM} from "@testing-library/react";
 
+import SingleIngredient from "../components/SingleIngredient";
+
 function Recipe() {
 
     let params = useParams();
 
     const [details, setDetails] = useState({});
     const [activeTab, setActiveTab] = useState("summary");
-    const [checked, setChecked] = useState(false);
 
     useEffect(() => {
         getRecipeDetails();
@@ -23,7 +24,7 @@ function Recipe() {
         try {
             const data = await axios.get(`https://api.spoonacular.com/recipes/${params.id}/information?apiKey=${process.env.REACT_APP_API_KEY}&addRecipeNutrition=true`);
             setDetails(data.data);
-            console.log(data.data);
+            // console.log(data.data);
         } catch
             (e) {
             console.error(e);
@@ -81,22 +82,15 @@ function Recipe() {
                         <ArticleIngredients>
                             <ul>
                                 {details.extendedIngredients.map((ingredient) => (
+
                                     <Ingredient
                                         key={ingredient.id}
-
                                     >
-                                        <input
-                                            type="checkbox"
-                                            // checked={checked}
-                                            onChange={() => setChecked(!checked)}
+                                        <SingleIngredient
 
+                                            inputType={"checkbox"}
+                                            ingredient={ingredient.original}
                                         />
-                                            <li>
-                                               <p className={checked === true ? "checked" : ""}>{ingredient.original}</p>
-                                            </li>
-
-
-
                                     </Ingredient>
 
                                 ))}
@@ -383,6 +377,12 @@ const ArticleIngredients = styled.div`
   } .checked {
         color: darkorange;
       }
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
   
   
   
@@ -439,9 +439,3 @@ const ArticleInformation = styled.div`
 
 `;
 
-// const NoResultIcon = styled.div`
-//
-//   position: absolute;
-//
-//
-// `;
