@@ -13,7 +13,6 @@ function Navigation() {
 
     const navLinkStyles = ({ isActive }) => {
         return  {
-
             border: isActive ? "0.3px solid white" : "",
             boxShadow: isActive ? "1px 1px 10px 1px white" : "none",
             color: isActive ? "var(--main-style-element-color)" : "#EEEBCE",

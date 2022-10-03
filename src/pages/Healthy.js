@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import HealthyFood from "../components/HealthyFood";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from "axios";
-
 
 
 function Healthy() {
@@ -12,20 +11,15 @@ function Healthy() {
 
     let params = useParams();
 
-    async function getHealthyRecipes( diet )   {
+    async function getHealthyRecipes(diet) {
 
         try {
-
-            const data = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&diet=${ diet }&addRecipeInformation=true&addRecipeNutrition=true&number=30`);
+            const data = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${process.env.REACT_APP_API_KEY}&diet=${diet}&addRecipeInformation=true&addRecipeNutrition=true&number=30`);
             setDiet(data.data.results);
             console.log(data.data.results);
 
-
-
         } catch (e) {
-
-            console.error( e );
-
+            console.error(e);
         }
 
     }
@@ -33,8 +27,6 @@ function Healthy() {
     useEffect(() => {
         getHealthyRecipes(params.diet);
     }, [params.diet]);
-
-
 
     return (
         <div>
@@ -48,7 +40,7 @@ function Healthy() {
                             style={{textDecoration: "none"}}
                         >
 
-                                <Card key={item.id}>
+                            <Card key={item.id}>
                                 <div>
                                     <img src={item.image} alt={item.title}/>
                                 </div>
@@ -73,7 +65,7 @@ const List = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
-  
+
   width: 100%;
   height: 620px;
   max-height: 620px;

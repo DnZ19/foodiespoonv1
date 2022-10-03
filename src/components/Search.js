@@ -19,6 +19,8 @@ function Search() {
 
     const navigate = useNavigate();
 
+    //nice to have filter options
+
     // const [cuisine, setCuisine] = useState("European");
     //
     // const cuisineOptions = ["African", "American", "British", "Cajun", "Caribbean", "Chinese", "Eastern European",
@@ -75,6 +77,7 @@ function Search() {
 
                     {error && <ErrorMessage>something went wrong...please try again.</ErrorMessage>}
 
+                    {/*Nice to have: some pop up or screen with some filter options------*/}
 
                     {/*<select onChange={( e ) => setCuisine(e.target.value)} defaultValue={cuisine}>*/}
                     {/*    {cuisineOptions.map((option, idx) => (*/}
@@ -82,6 +85,7 @@ function Search() {
                     {/*    ))}*/}
 
                     {/*</select>*/}
+
                 </FormStyle>
 
                 <SearchBox>
@@ -92,8 +96,6 @@ function Search() {
                             <Image><GiKnifeFork className="background-icon-search" /></Image>
 
                         </>
-
-
                     }
 
                     {query.length > 0 &&
@@ -109,8 +111,6 @@ function Search() {
                         >
                             {query.map((item) => {
                                 return (
-
-
                                     <SplideSlide
                                         key={item.id}>
                                         <Card>
@@ -151,14 +151,13 @@ function Search() {
                             })}
                         </Splide>
                     }
-
                 </SearchBox>
-
-
             </Wrapper>
         </div>
     );
 }
+
+export default Search;
 
 const Wrapper = styled.div`
   margin: 4rem 0;
@@ -318,7 +317,6 @@ const ErrorMessage = styled.div`
 
 `;
 
-
 const Image = styled.div`
   position: absolute;
   margin-top: 150px;
@@ -327,4 +325,3 @@ const Image = styled.div`
 `;
 
 
-export default Search;

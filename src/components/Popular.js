@@ -15,7 +15,6 @@ function Popular() {
 
     async function getPopular() {
 
-
         try {
 
             const api = await axios.get(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}&number=6`);
@@ -58,11 +57,7 @@ function Popular() {
                                                 {/*<Gradient />*/}
 
                                             </Link>
-
-
-
                                         </Card>
-
                                     </Slide>
 
                                     <TitleBar><h4>{recipe.title}</h4></TitleBar>
@@ -94,8 +89,6 @@ function Popular() {
 
                                 </SplideSlide>
 
-
-
                         );
                     })}
                 </Splide>
@@ -103,6 +96,8 @@ function Popular() {
         </div>
     );
 }
+
+export default Popular;
 
 const Wrapper = styled.div`
   //border: 1px solid black;
@@ -240,4 +235,3 @@ const InfoBar = styled.div`
 `;
 
 
-export default Popular;

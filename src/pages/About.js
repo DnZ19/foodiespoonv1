@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 function About() {
     return (
+
         <Wrapper>
 
             <h2>About Foodie App</h2>
@@ -22,6 +23,8 @@ function About() {
         </Wrapper>
     );
 }
+
+export default About;
 
 const Wrapper = styled.section`
   width: 100%;
@@ -44,4 +47,3 @@ const Wrapper = styled.section`
 
 `;
 
-export default About;

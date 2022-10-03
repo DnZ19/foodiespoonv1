@@ -4,8 +4,7 @@ import styled from "styled-components";
 import "@splidejs/splide/dist/css/splide.min.css";
 import {useParams} from "react-router-dom";
 import React from 'react';
-// import { GiKnifeFork } from "react-icons/gi";
-// import {logDOM} from "@testing-library/react";
+
 
 import SingleIngredient from "../components/SingleIngredient";
 

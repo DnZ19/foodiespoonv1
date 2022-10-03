@@ -4,39 +4,39 @@ import {useState} from "react";
 
 function HealthyFood() {
 
-    const [activeTab, setActiveTab] = useState("Vegan");
+    const [activeTab, setActiveTab] = useState("vegan");
 
     return (
         <List>
             <NavLink
                 to={"/healthy/Vegan"}
                 style={{textDecoration: "none"}}
-                className={activeTab === "Vegan" ? "active" : ""}
-                onClick={() => setActiveTab("Vegan")}
+                className={activeTab === "vegan" ? "active" : ""}
+                onClick={() => setActiveTab("vegan")}
             >
             <Button> Vegan </Button>
             </NavLink>
 
             <NavLink to={"/healthy/DairyFree"} style={{textDecoration: "none"}}>
             <Button
-                className={activeTab === "DairyFree" ? "active" : ""}
-                onClick={() => setActiveTab("DairyFree")}
+                className={activeTab === "dairyFree" ? "active" : ""}
+                onClick={() => setActiveTab("dairyFree")}
 
             > Dairy Free </Button>
             </NavLink>
 
             <NavLink to={"/healthy/Vegetarian"} style={{textDecoration: "none"}}>
             <Button
-                className={activeTab === "Vegetarian" ? "active" : ""}
-                onClick={() => setActiveTab("Vegetarian")}
+                className={activeTab === "vegetarian" ? "active" : ""}
+                onClick={() => setActiveTab("vegetarian")}
 
             > Vegetarian </Button>
             </NavLink>
 
             <NavLink to={"/healthy/GlutenFree"} style={{textDecoration: "none"}}>
             <Button
-                className={activeTab === "GlutenFree" ? "active" : ""}
-                onClick={() => setActiveTab("GlutenFree")}
+                className={activeTab === "glutenFree" ? "active" : ""}
+                onClick={() => setActiveTab("glutenFree")}
 
             > Gluten Free </Button>
             </NavLink>
@@ -46,6 +46,7 @@ function HealthyFood() {
 }
 
 export default HealthyFood;
+
 
 const List = styled.div`
   margin-top: 100px;
